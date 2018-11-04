@@ -29,7 +29,7 @@ public class Gui {
 	public static JLabel labelInput1 = new JLabel("Downloading speed(MB/s) : ");
 	public static JTextField output = new JTextField(10);
 	public static JLabel labelOutput = new JLabel("Time requested: ");
-	
+
 	public static void main(String[] args) {
 		createTextFieldInput();
 		createPanel();
@@ -37,34 +37,50 @@ public class Gui {
 		calculateEvent();
 		resetEvent();
 	}
-	
+
 	private static void resetEvent() {
 		buttonReset.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				input0.setText("");
 				input1.setText("");
 				output.setText("");
 			}
-		});		
-		
+		});
+
 	}
 
 	public static void calculateEvent() {
 		buttonInput.addActionListener(new ActionListener()
 		{
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String out = getInput(input0);
 				output.setText(out);
 			}
 		});
-		
+
 	}
 
 	public static String getInput(JTextField input2) {
 		String in = input0.getText();
 		String in1 = input1.getText();
-		String out = OutCalc.time(Double.parseDouble(in), Double.parseDouble(in1));
+		String out = null;
+		try {
+			/* 'out' viene usato per il parseDouble, per poter sapere quale
+			 * stringa non è un numero valido */
+			out = in;
+			double d1 = Double.parseDouble(out);
+			out = in1;
+			double d2 = Double.parseDouble(out);
+			out = OutCalc.time(d1, d2);
+		} catch(NumberFormatException ex) {
+			if(out.matches("\\s*")) // controlla se 'out' è una stringa vuota
+				out = "Invalid number: <empty>";
+			else
+				out = "Invalid number: '"+out+"'";
+		}
 		return out;
 	}
 
@@ -88,21 +104,21 @@ public class Gui {
 		panel.add(input0);
 		panel.add(labelInput1);
 		panel.add(input1);
-		
+
 		panel2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel2.add(labelOutput);
 		panel2.add(output);
-		
+
 		// Disable user input and set black color
 		output.setHorizontalAlignment(JTextField.CENTER);
 		output.setEnabled(false);
 		output.setDisabledTextColor(new Color(0,0,0));
-		
+
 		panel3.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		// buttonInput.setSize(50, 50);
 		panel3.add(buttonInput);
 		panel3.add(buttonReset);
 	}
 
-	
+
 }
