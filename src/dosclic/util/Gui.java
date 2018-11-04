@@ -21,14 +21,14 @@ public class Gui {
 	public static JPanel panel2 = new JPanel(new GridLayout(0,2));
 	public static JPanel panel3 = new JPanel(new GridLayout(0,2,15,0));
 	public static JPanel panelEmpty = new JPanel(new GridLayout(2,2));
-	public static JTextField input = new JTextField(10);
-	public static JLabel labelInput = new JLabel("Downloading size(GB): ");
+	public static JTextField input0 = new JTextField(10);
+	public static JLabel labelInput0 = new JLabel("Downloading size(GB): ");
 	public static JButton buttonInput = new JButton("Calculate");
 	public static JButton buttonReset = new JButton("Reset");
 	public static JTextField input1 = new JTextField(10);
 	public static JLabel labelInput1 = new JLabel("Downloading speed(MB/s) : ");
-	public static JTextField input2 = new JTextField(10);
-	public static JLabel labelInput2 = new JLabel("Time requested: ");
+	public static JTextField output = new JTextField(10);
+	public static JLabel labelOutput = new JLabel("Time requested: ");
 	
 	public static void main(String[] args) {
 		createTextFieldInput();
@@ -42,9 +42,9 @@ public class Gui {
 		buttonReset.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) {
-				input.setText("");
+				input0.setText("");
 				input1.setText("");
-				input2.setText("");
+				output.setText("");
 			}
 		});		
 		
@@ -54,22 +54,22 @@ public class Gui {
 		buttonInput.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) {
-				String out = getInput(input);
-				input2.setText(out);
+				String out = getInput(input0);
+				output.setText(out);
 			}
 		});
 		
 	}
 
 	public static String getInput(JTextField input2) {
-		String in = input.getText();
+		String in = input0.getText();
 		String in1 = input1.getText();
 		String out = OutCalc.time(Double.parseDouble(in), Double.parseDouble(in1));
 		return out;
 	}
 
 	public static void createTextFieldInput() {
-		input.setHorizontalAlignment(JTextField.LEFT);
+		input0.setHorizontalAlignment(JTextField.LEFT);
 	}
 	public static void createWindow() {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,19 +84,19 @@ public class Gui {
 
 	public static void createPanel() {
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 15, 30, 15));
-		panel.add(labelInput);
-		panel.add(input);
+		panel.add(labelInput0);
+		panel.add(input0);
 		panel.add(labelInput1);
 		panel.add(input1);
 		
 		panel2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		panel2.add(labelInput2);
-		panel2.add(input2);
+		panel2.add(labelOutput);
+		panel2.add(output);
 		
 		// Disable user input and set black color
-		input2.setHorizontalAlignment(JTextField.CENTER);
-		input2.setEnabled(false);
-		input2.setDisabledTextColor(new Color(0,0,0));
+		output.setHorizontalAlignment(JTextField.CENTER);
+		output.setEnabled(false);
+		output.setDisabledTextColor(new Color(0,0,0));
 		
 		panel3.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		// buttonInput.setSize(50, 50);
