@@ -29,7 +29,8 @@ public class Gui {
 	public static JLabel labelInput1 = new JLabel("Downloading speed(MB/s) : ");
 	public static JTextField output = new JTextField(10);
 	public static JLabel labelOutput = new JLabel("Time requested: ");
-
+	
+	
 	public static void main(String[] args) {
 		createTextFieldInput();
 		createPanel();
@@ -69,14 +70,14 @@ public class Gui {
 		String out = null;
 		try {
 			/* 'out' viene usato per il parseDouble, per poter sapere quale
-			 * stringa non è un numero valido */
+			 * stringa non ï¿½ un numero valido */
 			out = in;
 			double d1 = Double.parseDouble(out);
 			out = in1;
 			double d2 = Double.parseDouble(out);
 			out = OutCalc.time(d1, d2);
 		} catch(NumberFormatException ex) {
-			if(out.matches("\\s*")) // controlla se 'out' è una stringa vuota
+			if(out.matches("\\s*")) // controlla se 'out' ï¿½ una stringa vuota
 				out = "Invalid number: <empty>";
 			else
 				out = "Invalid number: '"+out+"'";
@@ -88,13 +89,13 @@ public class Gui {
 		input0.setHorizontalAlignment(JTextField.LEFT);
 	}
 	public static void createWindow() {
+		window.getContentPane().setBackground(new Color(77,77,77));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.add(panel, BorderLayout.NORTH);
 		window.add(panel2, BorderLayout.CENTER);
 		window.add(panel3, BorderLayout.SOUTH);
 		window.pack();
 		window.setResizable(false);
-
 		window.setVisible(true);
 	}
 
